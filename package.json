@@ -1,0 +1,11 @@
+{
+  "name": "ETC",
+  "version": "0.0.1",
+  "description": "ETC Hackthon",
+  "license": "hsjiang",
+  "dependencies": {
+    "csvtojson": "^1.1.7",
+    "request": "^2.82.0",
+    "wget-improved": "^1.5.0"
+  }
+}
