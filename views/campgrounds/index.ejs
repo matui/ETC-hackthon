@@ -3,11 +3,14 @@
  <div class="container">
      <header class="jumbotron">
          <div class="container">
-             <h1>Welcome To YelpCamp!</h1>
-             <p>View our hand-picked campgrounds from all over the world</p>
-             <p>
-                <a class="btn btn-primary btn-large" href="/campgrounds/new">Add New Campground</a>
-             </p>
+             <h1>即時路況監控、預測、媒合系統</h1>
+             <p>這個系統能夠監控及預估國道上的車流狀況，計算合理到達目的地的時間</p>
+             <p>使用者可以自創帳號，查詢不同路經所需花費的時間</p>
+             <p>使用者也可觀察其他使用者的行車路程，與其他使用者聯繫共乘</p>
+
+             <h2>
+                <a class="btn btn-primary btn-large" href="/campgrounds/new">行車規劃</a>
+             </h2>
          </div>
      </header>
      
@@ -15,9 +18,14 @@
         <% campgrounds.forEach(function(campground){ %>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                   <img src="<%= campground.image %>">
                    <div class="caption">
-                       <h4><%= campground.name %></h4>
+                       <h4><%= "起點： " + campground.start_point %></h4>
+                   </div>
+                   <div class="caption">
+                       <h4><%= "終點： " + campground.destination %></h4>
+                   </div>
+                   <div class="caption">
+                       <h4><%= "車種： " + campground.vehicle_type %></h4>
                    </div>
                    <p>
                        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>

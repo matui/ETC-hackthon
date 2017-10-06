@@ -8,20 +8,20 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, foundCampground){
            if(err){
-               req.flash("error", "Campground not found");
+               req.flash("error", "沒有找到規劃路徑");
                res.redirect("back");
            }  else {
                // does user own the campground?
             if(foundCampground.author.id.equals(req.user._id)) {
                 next();
             } else {
-                req.flash("error", "You don't have permission to do that");
+                req.flash("error", "未有執行權限");
                 res.redirect("back");
             }
            }
         });
     } else {
-        req.flash("error", "You need to be logged in to do that");
+        req.flash("error", "需要先註冊才能使用");
         res.redirect("back");
     }
 }
@@ -36,13 +36,13 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
             if(foundComment.author.id.equals(req.user._id)) {
                 next();
             } else {
-                req.flash("error", "You don't have permission to do that");
+                req.flash("error", "需要先註冊才能使用");
                 res.redirect("back");
             }
            }
         });
     } else {
-        req.flash("error", "You need to be logged in to do that");
+        req.flash("error", "需要先註冊才能使用");
         res.redirect("back");
     }
 }
@@ -51,7 +51,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    req.flash("error", "You need to be logged in to do that");
+    req.flash("error", "需要先註冊才能使用");
     res.redirect("/login");
 }
 

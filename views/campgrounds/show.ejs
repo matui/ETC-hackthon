@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <p class="lead">YelpCamp</p>
+            <p class="lead">路徑</p>
             <div class="list-group">
                 <li class="list-group-item active">Info 1</li>
                 <li class="list-group-item">Info 2</li>
@@ -13,8 +13,10 @@
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= campground.image %>">
                 <div class="caption-full">
-                    <h4 class="pull-right">$9.00/night</h4>
-                    <h4><a><%=campground.name%></a></h4>
+                    <h4 class="pull-right">共乘費：NT.100.00/per person</h4>
+                    <h4><a><%= "起點： " + campground.start_point%></a></h4>
+                    <h4><a><%= "終點： " + campground.destination%></a></h4>
+                    <h5><%= "車種： " + campground.vehicle_type %></h5>
                     <p><%= campground.description %></p>
                     <p>
                         <em>Submitted By <%= campground.author.username %></em>
@@ -36,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <strong><%= comment.author.username %></strong>
-                            <span class="pull-right">10 days ago</span>
+                            <span class="pull-right">seconds ago</span>
                             <p>
                                 <%= comment.text %> 
                             </p>

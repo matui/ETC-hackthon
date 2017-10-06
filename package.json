@@ -20,5 +20,13 @@
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^3.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nax3t/background-slider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nax3t/background-slider/issues"
+  },
+  "homepage": "https://github.com/nax3t/background-slider#readme"
 }
