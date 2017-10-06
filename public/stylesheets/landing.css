@@ -40,23 +40,23 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(http://www.freeway.gov.tw/PhotoGallerys/97_10.jpg) 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
-  animation-delay: 10s; 
+  background-image: url(http://www.freeway.gov.tw/PhotoGallerys/97_12.jpg);
+  animation-delay: 7s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
-  animation-delay: 20s; 
+  background-image: url(http://www.freeway.gov.tw/PhotoGallerys/97_01.jpg);
+  animation-delay: 14s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
-  animation-delay: 30s; 
+  background-image: url(http://imdl.imagemore.cn/imagemore_dir/comp/ipb00031/ipb00031002.jpg);
+  animation-delay: 21s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
-  animation-delay: 40s; 
+  background-image: url(https://cdn1-digiphoto-techbang.pixfs.net/system/images/17288/show/f5d55a7b4e4c43f6183497ac1d5f4bcc.jpg?1364545916);
+  animation-delay: 28s; 
 }
 
 @keyframes imageAnimation { 
