@@ -1,6 +1,6 @@
 const csv=require('csvtojson')
 const request=require('request')
-let etcs = require('./storage.js').etcs
+let {etcs,interchanges} = require('./storage.js')
 
 let date = new Date()
 date.setMinutes(date.getMinutes() - 20)
@@ -21,6 +21,9 @@ function importETCMap(cb){
        etcs[id] = obj
        etcs[id].Mileage = Mileage
        etcs[id].data = {}
+       if(!interchanges[obj.From])
+           interchanges[obj.From] = []
+       interchanges[obj.From].push({id,direction:obj.Direction})
    })
    .on('done',(error)=>{
        return cb()

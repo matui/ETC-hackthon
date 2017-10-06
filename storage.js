@@ -1,5 +1,7 @@
 let storage = {
-    etcs:{}
+    etcs:{},
+    interchanges:{}
 }
 
 exports.etcs = storage.etcs
+exports.interchanges = storage.interchanges
