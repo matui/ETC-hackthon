@@ -1,24 +1,46 @@
-const csv=require('csvtojson')
-const request=require('request')
-let date = new Date()
-date.setMinutes(date.getMinutes() - 20)
-setInterval(download_car_speed,10*1000)
-function download_car_speed(){
-   let y = date.getFullYear()
-   let m = ('0' + (date.getMonth() + 1)).slice(-2)
-   let d = ('0' + date.getDate()).slice(-2)
-   let h = ('0' + date.getHours()).slice(-2)
-   let mi = ('0' + (date.getMinutes() - (date.getMinutes()%5))).slice(-2)
-   let src = `http://tisvcloud.freeway.gov.tw/history/TDCS/M05A/${y}${m}${d}/${h}/TDCS_M05A_${y}${m}${d}_${h}${mi}00.csv`
-   csv({
-     noheader:true,
-     headers: ['TimeInterval','GantryFrom','GantryTo','VehicleType','SpaceMeanSpeed','Traffic']
-   })
-   .fromStream(request.get(src))
-   .on('json',(obj,index)=>{
-      console.log(JSON.stringify(obj))
-   })
-   .on('done',(error)=>{
-      date.setMinutes(date.getMinutes() + 5)
-   })
+var http = require('http')
+var express = require('express')
+var app = express()
+var server = http.createServer(app)
+let etcs = require('./storage.js').etcs
+
+app.get('/',function(request, response){
+    console.log(`Receive request ${request}`)
+    response.end('Hi!')
+})
+app.get('/traffic/:from/:to/:type',getTraffic)
+app.get('/traffic/:from/:to',getTraffic)
+app.get('/info/:from',getInfo)
+server.listen(8080,'0.0.0.0',function(){
+    console.log('Server run at http://127.0.0.1:8080/')
+})
+
+require('./query.js')
+
+function getInfo(req,res){
+    let {from} = req.params
+    console.log(`Get traffic query from ${from} to ${to} type ${type}`)
+    res.json(etcs[from])
+}
+
+function getTraffic(req,res){
+    let {from,to,type} = req.params
+    console.log(`Get traffic query from ${from} to ${to} type ${type}`)
+    let result =[]
+    let current = from
+    let next = ''
+    while (current != to){
+        next = Object.keys(etcs[current].data)[0]
+	console.log(etcs[current])
+	if(!next) break
+	let length = Number(Math.abs(etcs[current].Mileage - etcs[next].Mileage).toFixed(1))
+	if(type){
+	    let {traffic,speed} = etcs[current].data[next][type]
+	    result.push({from:current,to:next,length,traffic,speed})
+	}
+	else
+            result.push(etcs[current].data[next])
+	current = next
+    }
+    res.json({result})
 }
