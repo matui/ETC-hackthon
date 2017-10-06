@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">第一步驟 請選擇國道</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/campgrounds/new" method="">
+                <div class="form-group">
+                    <select class="form-control" type="text" name="road_type" placeholder="國道">
+                        <option>國道一號</option>
+                        <option>國道三號</option>
+                        <option>國道五號</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="road_description" placeholder="描述(ex. 特殊路段）">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

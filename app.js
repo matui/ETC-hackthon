@@ -54,5 +54,5 @@ app.get('/info/:from',backend.getInfo)
 app.get('/inter/:road',backend.getInter)
 app.get('/inter/:road/:direction',backend.getInter)
 app.get('/inter/',backend.getInter)
-app.listen(process.env.PORT || 8080);
-require('./query.js')
+app.listen(process.env.PORT || 3000);
+//require('./query.js')
