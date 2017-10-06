@@ -48,8 +48,11 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
-app.get('/traffic/:from/:to/:type',backend.getTraffic)
-app.get('/traffic/:from/:to',backend.getTraffic)
+app.get('/traffic/:from/:to/:direction/:type',backend.getTraffic)
+app.get('/traffic/:from/:to/:direction',backend.getTraffic)
 app.get('/info/:from',backend.getInfo)
+app.get('/inter/:road',backend.getInter)
+app.get('/inter/:road/:direction',backend.getInter)
+app.get('/inter/',backend.getInter)
 app.listen(process.env.PORT || 8080);
 require('./query.js')
