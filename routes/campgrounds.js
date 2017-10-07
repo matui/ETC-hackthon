@@ -57,31 +57,29 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       console.log(`Get traffic query from ${from} to ${to} direction ${direction} type ${type}`)
       let result =[]
       let miles = []
-      let city_paits = []
       let current = undefined
+      let stations = []
       let next = ''
       for(var i in interchanges[from]){
-    console.log(`Candidate ${interchanges[from][i]}`)
-    if (interchanges[from][i].direction == direction){
-        console.log("Get")
-        current = interchanges[from][i].id
-        break
-    }
+          console.log(`Candidate ${interchanges[from][i]}`)
+          if (interchanges[from][i].direction == direction){
+              console.log("Get")
+              current = interchanges[from][i].id
+              break
+          }
       }
+      stations.push(from)
       while (current && etcs[current].From != to){
+          stations.push(etcs[current].To)
           next = Object.keys(etcs[current].data)[0]
           console.log(etcs[current],next)
           if(!next) break
           let length = Number(Math.abs(etcs[current].Mileage - etcs[next].Mileage).toFixed(1))
-          if(type){
-              let {traffic,speed} = etcs[current].data[next][type]
-              result.push({from:current,to:next,length,traffic,speed})
-          }
-          else
-              result.push(etcs[current].data[next])
-              miles.push(length)
+          result.push(etcs[current].data[next])
+          miles.push(length)
           current = next
       }
+      console.log(JSON.stringify(stations))
       //res.json({result})
       //
 
