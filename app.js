@@ -49,7 +49,9 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.get('/traffic/:from/:to/:direction/:type',backend.getTraffic)
-app.get('/traffic/:from/:to/:direction',backend.getTraffic)
+//app.get('/traffic/:from/:to/:direction',backend.getTraffic)
+app.use('/traffic/:from/:to/:direction',campgroundRoutes)
+
 app.get('/info/:from',backend.getInfo)
 app.get('/inter/:road',backend.getInter)
 app.get('/inter/:road/:direction',backend.getInter)

@@ -19,6 +19,9 @@
                     <h5><%= "車種： " + campground.vehicle_type %></h5>
                     <h5><%= "國道： " + campground.road_type %></h5>
                     <p><%= campground.description %></p>
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/campgrounds/searchTraffic/<%= campground.start_point %>/<%= campground.destination %>/<%= campground.direction %>">查詢車況</a>
+                    </div>
                     <p>
                         <em>Submitted By <%= campground.author.username %></em>
                     </p>

@@ -9,6 +9,7 @@ var campgroundSchema = new mongoose.Schema({
    description: String,
    road_type: String,
    road_description: String,
+   direction: String,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
