@@ -1,48 +1,58 @@
 <% include ../partials/header %>
+<script src="https://d3js.org/d3.v4.js"></script>
 <div class="container">
     <div class="row">
          <h1 style="text-align: center">旅程交通狀況</h1>
 
-         <h1 style="text-align: center">從 <%= from %> 到 <%= to %> </h1>
+         <h2 style="text-align: center">從 [<%= from %>] 到 [<%= to %>] </h2>
+         
+         <h3 style="text-align: center"> 擁擠路段：  <a style="color: red"><%= congestion_place %></a> , 擁擠車速: <a style="color: red"><%= congestion %></a> km/hr </h3>
 
         <div style="width: 30%; margin: 25px auto;">
             <table class="table table-hover">
-        <thead>   
-          <tr>
-            <th><h3>車種</h3></th>
-            <th><h3>平均速度(km/hr)</h3></th>
-            <th><h3>數量</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><h4>小客車</h4></td>
-                <td align="center"><h4><%= avg_small_car%></h4></td>
-                <td><h4><%= count1 %></h4></td>
-            </tr>
-            <tr>
-                <td><h4>小貨車</h4></td>
-                <td align="center"><h4><%= avg_small_van%></h4></td>
-                <td><h4><%= count2 %></h4></td>
-            </tr>
-            <tr>
-                <td><h4>大客車</h4></td>
-                <td align="center"><h4><%= avg_big_car  %></h4></td>
-                <td><h4><%= count3 %></h4></td>
-            </tr>
-            <tr>
-                <td><h4>大貨車</h4></td>
-                <td align="center"><h4><%= avg_big_van  %></h4></td>
-                <td><h4><%= count4 %></h4></td>
-            </tr>
-            <tr>
-                <td><h4>聯結車</h4></td>
-                <td align="center"><h4><%= avg_cuscate_van  %></h4></td>
-                <td><h4><%= count5 %></h4></td>
-            </tr>
-        </tbody>
-      </table>
+                <thead>   
+                  <tr>
+                    <th><h3>車種</h3></th>
+                    <th><h3>平均速度(km/hr)</h3></th>
+                    <th><h3>數量</h3></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h4>小客車</h4></td>
+                        <td align="center"><h4><%= avg_small_car%></h4></td>
+                        <td><h4><%= count1 %></h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>小貨車</h4></td>
+                        <td align="center"><h4><%= avg_small_van%></h4></td>
+                        <td><h4><%= count2 %></h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>大客車</h4></td>
+                        <td align="center"><h4><%= avg_big_car  %></h4></td>
+                        <td><h4><%= count3 %></h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>大貨車</h4></td>
+                        <td align="center"><h4><%= avg_big_van  %></h4></td>
+                        <td><h4><%= count4 %></h4></td>
+                    </tr>
+                    <tr>
+                        <td><h4>聯結車</h4></td>
+                        <td align="center"><h4><%= avg_cuscate_van  %></h4></td>
+                        <td><h4><%= count5 %></h4></td>
+                    </tr>
+                </tbody>
+            </table>
             <a href="/campgrounds">Go Back</a>
+            <h4 style="text-align: center">經過路段</h4>
+            <% stations.forEach(function(station){ %>
+                <div class="col-md-3 col-sm-6">
+                    <%= station %>
+                </div>
+            <% }); %>
+
         </div>
     </div>
 </div>
