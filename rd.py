@@ -17,9 +17,9 @@ with open('data/ETCMap.csv', 'rb') as f:
 
 with open('out.txt','w') as w:
     w.write('[')
-    for i in l5:
+    for idx, i in enumerate(l1):
         w.write('"' + i + '"')
-        if i==l5[len(l5)-1]:
+        if idx==len(l1):
             w.write(']')
             break
         w.write(',')
