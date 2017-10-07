@@ -61,7 +61,6 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       let stations = []
       let next = ''
       for(var i in interchanges[from]){
-          console.log(`Candidate ${interchanges[from][i]}`)
           if (interchanges[from][i].direction == direction){
               console.log("Get")
               current = interchanges[from][i].id
@@ -71,7 +70,11 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       stations.push(from)
       while (current && etcs[current].From != to){
           stations.push(etcs[current].To)
-          next = Object.keys(etcs[current].data)[0]
+          Object.keys(etcs[current].data).forEach((i)=>{
+	      console.log(`Candidate : ${etcs[i]}`) 
+	      if(etcs[i].Direction == direction)
+	          next = i
+          })
           console.log(etcs[current],next)
           if(!next) break
           let length = Number(Math.abs(etcs[current].Mileage - etcs[next].Mileage).toFixed(1))
