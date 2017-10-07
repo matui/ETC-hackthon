@@ -11,8 +11,9 @@ function getInter(req,res){
 	return res.json(Object.keys(interchanges))
     let result = []
     Object.keys(interchanges).forEach((inter)=>{
-	let i = interchanges[inter]
-	if (i.road == road){
+	let i = interchanges[inter][0]
+	console.log(i.road,road)
+	if (i.road.indexOf(road)>-1){
 	    if(!direction || i.direction == direction)
 		result.push(inter)
 	}

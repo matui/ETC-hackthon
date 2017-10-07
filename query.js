@@ -43,6 +43,7 @@ function download_car_speed(){
    })
    .fromStream(request.get(src))
    .on('json',(obj,index)=>{
+       if(!etcs[obj.GantryFrom]) return
        etcs[obj.GantryFrom].updateTime = obj.TimeInterval
        let data = etcs[obj.GantryFrom].data
        if(!data[obj.GantryTo])
