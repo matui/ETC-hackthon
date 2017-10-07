@@ -83,6 +83,8 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
           current = next
       }
       console.log(JSON.stringify(stations))
+      console.log(stations)
+      //stations = JSON.stringify(stations)
       //res.json({result})
       //
 
@@ -102,12 +104,19 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       let cuscate_van_count = 0.0
       let count5 = 0
 
+      let congestion = 1000000000
+      let congestion_place = ''
+
       console.log('==================')
       for (var i=0; i<result.length; i++){
         if (result[i]['31']['speed']!=='0'){
           small_car += parseInt(result[i]['31']['speed'])
           small_car_count +=1.0
           count1 += parseInt(result[i]['31']['traffic'])
+          if (parseInt(result[i]['31']['speed']) < congestion ){
+            congestion = parseInt(result[i]['31']['speed'])
+            congestion_place = stations[i]
+          }
         }
         if (result[i]['32']['speed']!=='0'){
           small_van += parseInt(result[i]['32']['speed'])
@@ -138,7 +147,7 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       avg_big_van = (big_van/big_van_count).toFixed(2)
       avg_cuscate_van = (cuscate_van/cuscate_van_count).toFixed(2)
 
-      res.render('campgrounds/searchTraffic' ,{from: from, to: to, avg_small_car: avg_small_car,avg_small_van: avg_small_van,avg_big_car: avg_big_car, avg_big_van: avg_big_van, avg_cuscate_van: avg_cuscate_van, count1: count1, count2: count2, count3: count3, count4: count4, count5: count5});
+      res.render('campgrounds/searchTraffic' ,{congestion_place: congestion_place, congestion: congestion, stations: stations, from: from, to: to, avg_small_car: avg_small_car,avg_small_van: avg_small_van,avg_big_car: avg_big_car, avg_big_van: avg_big_van, avg_cuscate_van: avg_cuscate_van, count1: count1, count2: count2, count3: count3, count4: count4, count5: count5});
 
 
 
