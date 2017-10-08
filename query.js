@@ -23,7 +23,7 @@ function importETCMap(cb){
        etcs[id].data = {}
        if(!interchanges[obj.From])
            interchanges[obj.From] = []
-       interchanges[obj.From].push({id,direction:obj.Direction,road:obj.Road})
+       interchanges[obj.From].push({id,direction:obj.Direction,road:obj.Road,mileage:Mileage})
    })
    .on('done',(error)=>{
        return cb()

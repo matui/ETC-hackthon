@@ -53,21 +53,35 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 
 //road - show form to create new campground
-router.get("/searchTraffic/:from/:to/:direction", function(req, res){
+router.get("/searchTraffic/:from/:to", function(req, res){
   let {etcs,interchanges} = require('../storage.js')
-      let {from,to,direction,type} = req.params
-      console.log(`Get traffic query from ${from} to ${to} direction ${direction} type ${type}`)
+      let {from,to,type} = req.params
+      console.log(`Get traffic query from ${from} to ${to}`)
       let result =[]
       let miles = []
       let current = undefined
+      let direction = undefined
       let stations = []
       let next = ''
+      console.log(JSON.stringify(interchanges[from]))
+      console.log(JSON.stringify(interchanges[to]))
       for(var i in interchanges[from]){
-          if (interchanges[from][i].direction == direction){
+	  let {mileage} = interchanges[from][i]
+	  direction = interchanges[from][i].direction
+	  for(var j in interchanges[to]){
+	      console.log(`A: ${JSON.stringify(interchanges[from][i])},B: ${JSON.stringify(interchanges[to][j])}`)
+	      if (direction == 'S'){
+		  if(mileage >= interchanges[to][j].mileage)
+		      continue
+	      } else {
+		  if(mileage <= interchanges[to][j].mileage)
+		      continue
+	      }
               console.log(`Get ${interchanges[from][i]}`)
               current = interchanges[from][i].id
               break
           }
+	  if(current) break
       }
       do{
           stations.push(etcs[current].From)
