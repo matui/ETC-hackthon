@@ -19,6 +19,8 @@ var commentRoutes    = require("./routes/comments"),
 var url = "mongodb://henryEE:h831231@ds013475.mlab.com:13475/etc" || "mongodb://localhost/yelp_camp_v10";
 mongoose.connect(url);
 
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -50,6 +52,9 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 app.get('/traffic/:from/:to/:direction/:type',backend.getTraffic)
 //app.get('/traffic/:from/:to/:direction',backend.getTraffic)
+//V
+//
+
 app.use('/traffic/:from/:to/:direction',campgroundRoutes)
 
 app.get('/info/:from',backend.getInfo)
