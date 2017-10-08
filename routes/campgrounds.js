@@ -27,13 +27,14 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var destination = req.body.destination
     var vehicle_type = req.body.vehicle_type
     var road_type = req.body.road_type
+    var fee = req.body.fee
     var road_description = req.body.road_description
     var author = {
         id: req.user._id,
         username: req.user.username
     }
     var direction = req.body.direction
-    var newCampground = {direction: direction, start_point: start_point, destination: destination, road_type: road_type, vehicle_type: vehicle_type, description: desc, author:author}
+    var newCampground = {fee: fee, direction: direction, start_point: start_point, destination: destination, road_type: road_type, vehicle_type: vehicle_type, description: desc, author:author}
     console.log('=================================')
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
@@ -41,7 +42,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //redirect back to campgrounds page
-            //console.log(newlyCreated);
+            console.log(newlyCreated);
             //res.redirect("/campgrounds");
             //res.redirect('/traffic/' + start_point + '/' + destination + '/S')
             res.redirect("/campgrounds");

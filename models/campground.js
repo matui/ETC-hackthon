@@ -10,6 +10,7 @@ var campgroundSchema = new mongoose.Schema({
    road_type: String,
    road_description: String,
    direction: String,
+   fee: String,
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,

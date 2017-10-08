@@ -6,7 +6,7 @@
             <form action="/campgrounds" method="POST">
                 <div class="form-group">
                     <% console.log(rd) %>
-                    <p>請選擇起點</p>
+                    <p>請選擇 起點</p>
                     <select class="form-control" type="text" name="start_point" placeholder="起點">
                     <% console.log(l1.length) %>
                     <% l1.forEach(function(item,i){ %>
@@ -15,7 +15,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <p>請選擇終點</p>
+                    <p>請選擇 終點</p>
                     <select class="form-control" type="text" name="destination" placeholder="起點">
                     <% console.log(l1.length) %>
                     <% l1.forEach(function(item,i){ %>
@@ -30,10 +30,13 @@
                     <input class="form-control" type="text" name="direction" placeholder= <%= dir %> value=<%= dir %> > 
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="vehicle_type" placeholder="車種">
+                    <input class="form-control" type="text" name="vehicle_type" placeholder="聯絡電話（共乘用）">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="description" placeholder="描述(ex. 可否共乘？)">
+                    <input class="form-control" type="text" name="fee" placeholder="預收的共乘費（每位）">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="description" placeholder="可共乘位數">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit!</button>
