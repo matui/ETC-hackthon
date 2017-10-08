@@ -171,6 +171,8 @@ router.get("/searchTraffic/:from/:to", function(req, res){
       for (var i=0;i<miles.length; i++){
         sum_length += miles[i]
       }
+
+      sum_length = sum_length.toFixed(2)
       
       let time = ((sum_length / avg_small_car)*60).toFixed(2)
       
