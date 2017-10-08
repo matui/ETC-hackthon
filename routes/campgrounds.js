@@ -67,23 +67,22 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
               break
           }
       }
-      stations.push(from)
-      while (current && etcs[current].From != to){
-          stations.push(etcs[current].To)
+      do{
+          stations.push(etcs[current].From)
           Object.keys(etcs[current].data).forEach((i)=>{
 	      console.log(`Candidate : ${JSON.stringify(etcs[i])}`) 
 	      if(etcs[i].Direction == direction && etcs[i].Road == etcs[current].Road)
 	          next = i
           })
           console.log(etcs[current],next)
-          if(!next) break
+          if(!next||stations.length > 30) break
           let length = Number(Math.abs(etcs[current].Mileage - etcs[next].Mileage).toFixed(1))
           result.push(etcs[current].data[next])
           miles.push(length)
           current = next
-      }
+      } while (current && etcs[current].To != to)
+      stations.push(to)
       console.log(JSON.stringify(stations))
-      console.log(stations)
       //stations = JSON.stringify(stations)
       //res.json({result})
       //
