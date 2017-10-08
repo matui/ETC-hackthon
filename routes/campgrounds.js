@@ -62,7 +62,7 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       let next = ''
       for(var i in interchanges[from]){
           if (interchanges[from][i].direction == direction){
-              console.log("Get")
+              console.log(`Get ${interchanges[from][i]}`)
               current = interchanges[from][i].id
               break
           }
@@ -71,8 +71,8 @@ router.get("/searchTraffic/:from/:to/:direction", function(req, res){
       while (current && etcs[current].From != to){
           stations.push(etcs[current].To)
           Object.keys(etcs[current].data).forEach((i)=>{
-	      console.log(`Candidate : ${etcs[i]}`) 
-	      if(etcs[i].Direction == direction)
+	      console.log(`Candidate : ${JSON.stringify(etcs[i])}`) 
+	      if(etcs[i].Direction == direction && etcs[i].Road == etcs[current].Road)
 	          next = i
           })
           console.log(etcs[current],next)
