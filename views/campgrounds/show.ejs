@@ -20,7 +20,7 @@
                     <h5><%= "國道： " + campground.road_type %></h5>
                     <h5><%= "可共乘位數： " + campground.description %></h5>
                     <div class="text-right">
-                        <a class="btn btn-success" href="/campgrounds/searchTraffic/<%= campground.start_point %>/<%= campground.destination %>/<%= campground.direction %>">查詢車況</a>
+                        <a class="btn btn-success" href="/campgrounds/searchTraffic/<%= campground.start_point %>/<%= campground.destination %>">查詢車況</a>
                     </div>
                     <p>
                         <em>Submitted By <%= campground.author.username %></em>
