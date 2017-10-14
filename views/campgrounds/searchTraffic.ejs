@@ -2,11 +2,14 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 <div class="container">
     <div class="row">
-         <h1 style="text-align: center">旅程交通狀況</h1>
+        <h1 style="text-align: center">旅程交通狀況</h1>
 
-         <h2 style="text-align: center">從 [<%= from %>] 到 [<%= to %>] </h2>
-         
-         <h3 style="text-align: center"> 擁擠路段：  <a style="color: red"><%= congestion_place %></a> , 擁擠車速: <a style="color: red"><%= congestion %></a> km/hr </h3>
+        <h2 style="text-align: center">從 [<%= from %>] 到 [<%= to %>] </h2>
+        
+
+        <h3 style="text-align: center; margin-top: 50px;"> 擁擠路段：  <a style="color: red"><%= congestion_place %></a> , 擁擠車速: <a style="color: red"><%= congestion %></a> km/hr </h3>
+        <h3 style="text-align: center"> <%= "總長度： " + sum_length +  "km" %></h3> 
+        <h3 style="text-align: center"> <%= "預估行使國道時間： " +  time +  "min" %> </h3>
 
         <div style="width: 30%; margin: 25px auto;">
             <table class="table table-hover">
@@ -45,11 +48,18 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="/campgrounds">Go Back</a>
-            <h4 style="text-align: center">經過路段</h4>
-            <% stations.forEach(function(station){ %>
+            <h1 style="text-align: center"><a href="/campgrounds">返回前頁</a></h1>
+            <h1 style="text-align: center">經過路段</h1>
+            <% stations.forEach(function(station, idx){ %>
                 <div class="col-md-12 col-sm-6">
-                    <h5 align='center'><%= station %></a>
+                    <h5 style="margin: 0px 0px 0px 0px" align='center'><%= station %></a>
+                    <% if(station!==stations[stations.length-1]) {%>
+                        <p style="margin: 5px 0px 0px 0px">|</p>
+                        <% if(idx<miles.length){  %>
+                            <p style="margin: 5px 0px 5px 0px"><%= miles[idx] + ' km' %></p>
+                        <% } %>
+                        <p style="margin: 0px 0px 5px 0px">| </p>
+                    <% } %>
                 </div>
             <% }); %>
 

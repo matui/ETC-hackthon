@@ -55,6 +55,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 //road - show form to create new campground
 router.get("/searchTraffic/:from/:to", function(req, res){
+<<<<<<< HEAD
       let {from,to,type} = req.params
       console.log(`Get traffic query from ${from} to ${to}`)
       let result =[]
@@ -66,6 +67,26 @@ router.get("/searchTraffic/:from/:to", function(req, res){
       console.log(JSON.stringify(interchanges[from]))
       console.log(JSON.stringify(interchanges[to]))
       for(var i in interchanges[from]){
+=======
+
+
+
+
+    let {etcs,interchanges} = require('../storage.js')
+    let {from,to,type} = req.params
+    console.log(`Get traffic query from ${from} to ${to}`)
+    let result =[]
+    let miles = []
+    let current = undefined
+    let direction = undefined
+    let stations = []
+    let next = ''
+    console.log(JSON.stringify(interchanges[from]))
+    console.log(JSON.stringify(interchanges[to]))
+    
+
+    for(var i in interchanges[from]){
+>>>>>>> c00087236a68ccdf0d661b280f11aa7e5f153dcb
 	  let {mileage} = interchanges[from][i]
 	  direction = interchanges[from][i].direction
 	  for(var j in interchanges[to]){
@@ -81,15 +102,15 @@ router.get("/searchTraffic/:from/:to", function(req, res){
               current = interchanges[from][i].id
               break
           }
-	  if(current) break
-      }
+      if(current) break
+    }
       do{
           stations.push(etcs[current].From)
           Object.keys(etcs[current].data).forEach((i)=>{
-	      console.log(`Candidate : ${JSON.stringify(etcs[i])}`) 
-	      if(etcs[i].Direction == direction && etcs[i].Road == etcs[current].Road)
-	          next = i
-          })
+          console.log(`Candidate : ${JSON.stringify(etcs[i])}`) 
+          if(etcs[i].Direction == direction && etcs[i].Road == etcs[current].Road)
+              next = i
+            })
           console.log(etcs[current],next)
           if(!next||stations.length > 30) break
           let length = Number(Math.abs(etcs[current].Mileage - etcs[next].Mileage).toFixed(1))
@@ -99,9 +120,7 @@ router.get("/searchTraffic/:from/:to", function(req, res){
       } while (current && etcs[current].To != to)
       stations.push(to)
       console.log(JSON.stringify(stations))
-      //stations = JSON.stringify(stations)
-      //res.json({result})
-      //
+
 
       let small_car = 0
       let small_car_count = 0.0
@@ -118,7 +137,6 @@ router.get("/searchTraffic/:from/:to", function(req, res){
       let cuscate_van = 0
       let cuscate_van_count = 0.0
       let count5 = 0
-
       let congestion = 1000000000
       let congestion_place = ''
 
@@ -162,7 +180,19 @@ router.get("/searchTraffic/:from/:to", function(req, res){
       avg_big_van = (big_van/big_van_count).toFixed(2)
       avg_cuscate_van = (cuscate_van/cuscate_van_count).toFixed(2)
 
-      res.render('campgrounds/searchTraffic' ,{congestion_place: congestion_place, congestion: congestion, stations: stations, from: from, to: to, avg_small_car: avg_small_car,avg_small_van: avg_small_van,avg_big_car: avg_big_car, avg_big_van: avg_big_van, avg_cuscate_van: avg_cuscate_van, count1: count1, count2: count2, count3: count3, count4: count4, count5: count5});
+      console.log("stations: " + stations.length)
+      console.log("miles: " + miles.length)
+      let sum_length = 0
+      for (var i=0;i<miles.length; i++){
+        sum_length += miles[i]
+      }
+
+      sum_length = sum_length.toFixed(2)
+      
+      let time = ((sum_length / avg_small_car)*60).toFixed(2)
+      
+
+      res.render('campgrounds/searchTraffic' ,{time: time, sum_length: sum_length, miles: miles, congestion_place: congestion_place, congestion: congestion, stations: stations, from: from, to: to, avg_small_car: avg_small_car,avg_small_van: avg_small_van,avg_big_car: avg_big_car, avg_big_van: avg_big_van, avg_cuscate_van: avg_cuscate_van, count1: count1, count2: count2, count3: count3, count4: count4, count5: count5});
 
 
 
