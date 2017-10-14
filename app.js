@@ -16,7 +16,7 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index")
  
-var url = "mongodb://henryEE:h831231@ds013475.mlab.com:13475/etc" || "mongodb://localhost/yelp_camp_v10";
+var url = "mongodb://henryEE:h831231@ds013475.mlab.com:13475/etc"
 mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -48,13 +48,10 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
-app.get('/traffic/:from/:to/:direction/:type',backend.getTraffic)
-//app.get('/traffic/:from/:to/:direction',backend.getTraffic)
-app.use('/traffic/:from/:to/:direction',campgroundRoutes)
 
 app.get('/info/:from',backend.getInfo)
 app.get('/inter/:road',backend.getInter)
 app.get('/inter/:road/:direction',backend.getInter)
 app.get('/inter/',backend.getInter)
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 8080);
 require('./query.js')
