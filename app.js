@@ -18,13 +18,8 @@ var commentRoutes    = require("./routes/comments"),
  
 var url = "mongodb://henryEE:h831231@ds013475.mlab.com:13475/etc"
 mongoose.connect(url);
-
-
-
 app.use(bodyParser.urlencoded({extended: true}));
-app.engine('html',require('ejs').renderFile)
-app.set("view engine", "html")
-
+app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
