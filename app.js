@@ -22,7 +22,9 @@ mongoose.connect(url);
 
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
+app.engine('html',require('ejs').renderFile)
+app.set("view engine", "html")
+
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
@@ -50,16 +52,6 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
-<<<<<<< HEAD
-=======
-app.get('/traffic/:from/:to/:direction/:type',backend.getTraffic)
-//app.get('/traffic/:from/:to/:direction',backend.getTraffic)
-//V
-//
-
-app.use('/traffic/:from/:to/:direction',campgroundRoutes)
->>>>>>> c00087236a68ccdf0d661b280f11aa7e5f153dcb
-
 app.get('/info/:from',backend.getInfo)
 app.get('/inter/:road',backend.getInter)
 app.get('/inter/:road/:direction',backend.getInter)
